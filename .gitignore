@@ -1,4 +1,5 @@
 .vscode
+.cache
 gatsby/.vscode
 gatsby/node_modules
 sanity/.vscode
