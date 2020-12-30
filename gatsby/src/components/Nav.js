@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 import styled from 'styled-components';
 
 const NavStyles = styled.nav`
-  padding: 2.5vh 0;
+  padding: 1vh 0 0 0;
 
   .visible-nav {
     display: flex;
@@ -27,7 +27,7 @@ const NavStyles = styled.nav`
     font-family: RalewayBold;
     font-weight: 700;
     text-transform: capitalize;
-    padding: 1rem 0 2.5rem 0;
+    padding-bottom: 0.2rem;
     a {
       position: relative;
     }
@@ -59,6 +59,7 @@ const NavStyles = styled.nav`
     cursor: default;
     flex: 1 0 200px;
     position: relative;
+    align-self: flex-end;
 
     p {
       padding: 1rem 2rem;
@@ -107,8 +108,8 @@ const NavStyles = styled.nav`
 
   .nav-banner {
     background-color: var(--grey-bg);
-    font-size: 3.6rem;
-    min-height: 8rem;
+    font-size: 2.6rem;
+    padding: 1rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
