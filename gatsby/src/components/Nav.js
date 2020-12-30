@@ -6,14 +6,9 @@ const NavStyles = styled.nav`
   padding: 2.5vh 0;
 
   .visible-nav {
-    margin-bottom: 3.5vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    .dropdown-hover:nth-of-type(2) {
-      margin-right: 20px;
-    }
   }
 
   li,
@@ -32,6 +27,27 @@ const NavStyles = styled.nav`
     font-family: RalewayBold;
     font-weight: 700;
     text-transform: capitalize;
+    padding: 1rem 0 2.5rem 0;
+    a {
+      position: relative;
+    }
+
+    a:after {
+      content: '';
+      height: 29px;
+      width: 0;
+      background-color: var(--accent-coral);
+      position: absolute;
+      border-radius: 2px;
+      left: 3px;
+      bottom: 8px;
+      z-index: -10;
+      transition: width 0.3s;
+    }
+    a:hover:after {
+      width: 99.5%;
+      transition: width 0.3s;
+    }
 
     span {
       font-size: 3rem;
