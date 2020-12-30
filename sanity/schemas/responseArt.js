@@ -42,29 +42,17 @@ export default {
     {
       name: 'image',
       title: 'Response Art Drawing',
-      type: 'image',
+      type: 'reference',
+      to: [{ type: 'imageBlock' }],
       description:
         'Upload the photo/scan of the response art drawing. Ideal resolution is 1200px by 800px, smaller images may appear pixelated on the site.',
-      options: {
-        hotspot: true,
-      },
-      fields: [
-        {
-          name: 'altText',
-          title: 'Alternative Text',
-          type: 'string',
-          options: {
-            isHighlighted: true,
-          },
-        },
-      ],
     },
   ],
   preview: {
     select: {
       name: 'name',
       sessionDate: 'sessionDate',
-      image: 'image',
+      image: 'image.imageFile',
     },
     prepare: (fields) => ({
       title: `${fields.name} from ${fields.sessionDate}`,

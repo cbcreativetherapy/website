@@ -30,45 +30,14 @@ export default {
     {
       name: 'heroImage',
       title: 'Hero Image',
-      type: 'image',
+      type: 'reference',
+      to: [{ type: 'imageBlock' }],
       fieldset: 'heroContent',
-      options: {
-        hotspot: true,
-      },
-      fields: [
-        {
-          name: 'altText',
-          title: 'Alternative Text',
-          type: 'string',
-          options: {
-            isHighlighted: true,
-          },
-        },
-      ],
     },
     {
-      name: 'genericSectionsArray',
-      title: 'Generic Sections Array',
-      type: 'array',
-      of: [
-        {
-          title: 'Generic Section Block',
-          type: 'object',
-          fields: [
-            {
-              name: 'heading',
-              title: 'Heading',
-              type: 'string',
-            },
-            {
-              name: 'paragraph',
-              title: 'Paragraph',
-              type: 'array',
-              of: [{ type: 'block' }],
-            },
-          ],
-        },
-      ],
+      name: 'sectionsArray',
+      title: 'Sections Array',
+      type: 'contentBlockArray',
     },
     {
       name: 'ctaBannerReference',

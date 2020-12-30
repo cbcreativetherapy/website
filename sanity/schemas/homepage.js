@@ -20,8 +20,8 @@ export default {
       },
     },
     {
-      name: 'sitePreviewArray',
-      title: 'Site Preview Blocks',
+      name: 'sitePreviewSection',
+      title: 'Site Preview Section',
       options: {
         collapsible: true,
         collapsed: false,
@@ -39,21 +39,9 @@ export default {
     {
       name: 'heroImage',
       title: 'Hero Image',
-      type: 'image',
+      type: 'reference',
+      to: [{ type: 'imageBlock' }],
       fieldset: 'heroContent',
-      options: {
-        hotspot: true,
-      },
-      fields: [
-        {
-          name: 'altText',
-          title: 'Alternative Text',
-          type: 'string',
-          options: {
-            isHighlighted: true,
-          },
-        },
-      ],
     },
     {
       name: 'introHeading',
@@ -68,29 +56,9 @@ export default {
       fieldset: 'introContent',
     },
     {
-      name: 'previewContentArray',
-      title: 'Preview Content Array',
-      type: 'array',
-      fieldset: 'sitePreviewArray',
-      of: [
-        {
-          title: 'Preview Content Block',
-          type: 'object',
-          fields: [
-            {
-              name: 'heading',
-              title: 'Heading',
-              type: 'string',
-            },
-            {
-              name: 'paragraph',
-              title: 'Paragraph',
-              type: 'text',
-              validation: (Rule) => Rule.max(150),
-            },
-          ],
-        },
-      ],
+      name: 'sitePreviewBlock',
+      title: 'Site Preview Block',
+      type: 'contentBlockArray',
     },
     {
       name: 'ctaBannerReference',
