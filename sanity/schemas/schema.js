@@ -8,6 +8,7 @@ import schemaTypes from 'all:part:@sanity/base/schema-type';
 
 import homepage from './homepage';
 import about from './about';
+import blogPost from './blogPost';
 
 import imageBlock from './imageBlock';
 import responseArt from './responseArt';
@@ -24,6 +25,7 @@ export default createSchema({
   types: schemaTypes.concat([
     homepage,
     about,
+    blogPost,
     responseArt,
     ctaBanner,
     imageBlock,

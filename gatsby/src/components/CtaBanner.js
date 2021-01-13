@@ -2,17 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const CtaBannerStyles = styled.section`
-  height: 25vh;
+  padding: 9rem 0;
   background-color: var(--grey-bg);
-  .wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
 
   h3 {
     font-size: 3.5rem;
+    text-align: center;
   }
 `;
 

@@ -51,6 +51,14 @@ p, li {
     transition: border-bottom 0.3s;
   }
 }
+.link-blue {
+  color: var(--accent-blue);
+  &:hover,
+  &:focus {
+    border-bottom: 1px solid var(--accent-blue);
+    transition: border-bottom 0.3s;
+  }
+}
 
 `;
 

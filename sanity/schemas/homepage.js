@@ -44,15 +44,9 @@ export default {
       fieldset: 'heroContent',
     },
     {
-      name: 'introHeading',
-      title: 'Introduction Heading',
-      type: 'string',
-      fieldset: 'introContent',
-    },
-    {
-      name: 'introParagraph',
-      title: 'Introduction Paragraph',
-      type: 'text',
+      name: 'introSection',
+      title: 'Introduction Section',
+      type: 'genericContentBlock',
       fieldset: 'introContent',
     },
     {
