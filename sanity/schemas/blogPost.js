@@ -1,3 +1,9 @@
+import React from 'react';
+
+const highlightRender = (props) => (
+  <span style={{ backgroundColor: 'yellow' }}>{props.children}</span>
+);
+
 export default {
   name: 'blog-post',
   title: 'Blog Post',
@@ -8,6 +14,15 @@ export default {
       title: 'Post Title',
       type: 'string',
       description: 'Title of your blog post.',
+    },
+    {
+      name: 'postDescription',
+      title: 'Post Description',
+      type: 'string',
+      description:
+        'Brief description of your website. Used as the description users will see when they share this post. This can the first few sentences of your post.',
+      validation: (Rule) =>
+        Rule.required().max(200).warning('No more than 200 characters'),
     },
     {
       name: 'slug',
@@ -60,9 +75,40 @@ export default {
       name: 'post',
       title: 'Blog Post',
       type: 'array',
-      of: [{ type: 'block' }, { type: 'image' }],
+      of: [
+        {
+          type: 'block',
+          marks: {
+            decorators: [
+              { title: 'Strong', value: 'strong' },
+              { title: 'Emphasis', value: 'em' },
+              { title: 'Highlight', value: 'highlight' },
+            ],
+          },
+        },
+        {
+          type: 'image',
+        },
+      ],
       description:
-        'All of your blog post lives inside of here. You can include images as well.',
+        'All of your blog post lives inside of here. You cannot currently include images.',
+    },
+    {
+      name: 'category',
+      type: 'array',
+      title: 'Category',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'blogCategory' }],
+        },
+      ],
+    },
+    {
+      name: 'ctaBannerReference',
+      title: 'Call to Action Banner Reference',
+      type: 'reference',
+      to: [{ type: 'ctaBanner' }],
     },
   ],
   preview: {

@@ -8,6 +8,7 @@ import schemaTypes from 'all:part:@sanity/base/schema-type';
 
 import homepage from './homepage';
 import about from './about';
+import ourServices from './ourServices';
 import blogPost from './blogPost';
 
 import imageBlock from './imageBlock';
@@ -16,6 +17,8 @@ import ctaBanner from './ctaBanner';
 
 import genericContentBlock from './genericContentBlock';
 import contentBlockArray from './contentBlockArray';
+import metaContent from './metaContent';
+import blogCategory from './blogCategory';
 
 export default createSchema({
   // We name our schema
@@ -24,12 +27,14 @@ export default createSchema({
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
     homepage,
-    about,
+    ourServices,
     blogPost,
     responseArt,
     ctaBanner,
     imageBlock,
     genericContentBlock,
     contentBlockArray,
+    blogCategory,
+    metaContent,
   ]),
 });

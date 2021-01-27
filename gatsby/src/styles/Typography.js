@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 import MontserratRegular from '../assets/fonts/Montserrat/Montserrat-Regular.ttf';
+import MontserratSemiBolded from '../assets/fonts/Montserrat/Montserrat-SemiBold.ttf';
 import QuicksandRegular from '../assets/fonts/Quicksand/static/Quicksand-Regular.ttf';
 import QuicksandLight from '../assets/fonts/Quicksand/static/Quicksand-Light.ttf';
 import RalewayRegular from '../assets/fonts/Raleway/static/Raleway-Regular.ttf';
@@ -11,6 +12,11 @@ const Typography = createGlobalStyle`
 @font-face {
   font-family: MontserratReg;
   src: url(${MontserratRegular})
+}
+
+@font-face {
+  font-family: MontserratSemiBold;
+  src: url(${MontserratSemiBolded});
 }
 
 @font-face {
@@ -53,6 +59,8 @@ p, li {
 }
 .link-blue {
   color: var(--accent-blue);
+  border-bottom: 1px solid var(--main-bg);
+  transition: border-bottom 0.3s;
   &:hover,
   &:focus {
     border-bottom: 1px solid var(--accent-blue);

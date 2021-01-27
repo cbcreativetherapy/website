@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { graphql, Link, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
 import { FaInstagram } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
@@ -30,11 +30,14 @@ const FooterStyles = styled.footer`
     width: calc(60% - 75px);
     flex-shrink: 2;
     @media (max-width: 560px) {
-      width: calc(100% - 100px);
+      width: 200px;
     }
     @media (max-width: 400px) {
       width: 100%;
       margin-top: 1.8rem;
+      p {
+        width: 200px;
+      }
     }
   }
   .social-media {
@@ -102,6 +105,20 @@ const FooterStyles = styled.footer`
 `;
 
 export default function Footer() {
+  const allBlogPosts = useStaticQuery(graphql`
+    query {
+      allSanityBlogPost {
+        nodes {
+          postTitle
+          slug {
+            current
+          }
+        }
+      }
+    }
+  `);
+  const latestBlog = allBlogPosts.allSanityBlogPost.nodes.map((node) => node);
+  const blogSlug = `/post/${latestBlog[0].slug.current}`;
   return (
     <FooterStyles className="wrapper">
       <div className="logo">
@@ -109,7 +126,10 @@ export default function Footer() {
       </div>
       <div className="latest-blog">
         <p>
-          See our latest blog post - Finals season: Coping with academic stress
+          See our latest blog post -{' '}
+          <Link className="link-blue" to={blogSlug}>
+            {latestBlog[0].postTitle}
+          </Link>
         </p>
       </div>
       <div className="social-media">
@@ -136,7 +156,7 @@ export default function Footer() {
       <div className="copyright">
         <p>
           Designed by:{' '}
-          <Link className="link" to="/">
+          <Link className="link" to="/about">
             Cassandra Brennan
           </Link>
         </p>

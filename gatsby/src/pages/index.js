@@ -6,6 +6,7 @@ import PortableText from '@sanity/block-content-to-react';
 import HeroHeader from '../components/HeroHeader';
 import CtaBanner from '../components/CtaBanner';
 import Hexagon from '../components/svg/Hexagon';
+import SEO from '../components/SEO';
 
 const HomePageStyles = styled.div`
   .introduction {
@@ -105,37 +106,62 @@ const HomePageStyles = styled.div`
 `;
 
 export default function HomePage({ data: { homePage } }) {
+  console.log(homePage);
   return (
-    <HomePageStyles>
-      <HeroHeader
-        h1Heading={homePage.h1Heading}
-        imageSrc={homePage.heroImage.imageFile.asset.fluid.src}
+    <>
+      <SEO
+        title={homePage.metaContent.title}
+        description={homePage.metaContent.description[0].children.text}
+        image={homePage.metaContent.image.imageFile.asset.fluid.src}
       />
-      <div className="wrapper">
-        <section className="introduction">
-          <h2>{homePage.introSection.heading}</h2>
-          <PortableText blocks={homePage.introSection._rawParagraph} />
-        </section>
-      </div>
-      <section className="site-preview">
+      <HomePageStyles>
+        <HeroHeader
+          h1Heading={homePage.h1Heading}
+          imageSrc={homePage.heroImage.imageFile.asset.fluid.src}
+        />
         <div className="wrapper">
-          {homePage.sitePreviewBlock.map((block) => (
-            <div className="block-container" key={block._key}>
-              <Hexagon />
-              <h3>{block.heading}</h3>
-              <PortableText blocks={block._rawParagraph} />
-            </div>
-          ))}
+          <section className="introduction">
+            <h2>{homePage.introSection.heading}</h2>
+            <PortableText blocks={homePage.introSection._rawParagraph} />
+          </section>
         </div>
-      </section>
-      <CtaBanner bannerHeading={homePage.ctaBannerReference.heading} />
-    </HomePageStyles>
+        <section className="site-preview">
+          <div className="wrapper">
+            {homePage.sitePreviewBlock.map((block) => (
+              <div className="block-container" key={block._key}>
+                <Hexagon />
+                <h3>{block.heading}</h3>
+                <PortableText blocks={block._rawParagraph} />
+              </div>
+            ))}
+          </div>
+        </section>
+        <CtaBanner bannerHeading={homePage.ctaBannerReference.heading} />
+      </HomePageStyles>
+    </>
   );
 }
 
 export const query = graphql`
   query {
     homePage: sanityIndex {
+      metaContent {
+        title
+        description {
+          children {
+            text
+          }
+        }
+        image {
+          imageFile {
+            asset {
+              fluid(maxWidth: 1200) {
+                ...GatsbySanityImageFluid
+              }
+            }
+          }
+        }
+      }
       h1Heading
       heroImage {
         imageFile {

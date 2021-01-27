@@ -30,6 +30,11 @@ export default {
   ],
   fields: [
     {
+      name: 'metaContent',
+      title: 'Meta Content',
+      type: 'metaContent',
+    },
+    {
       name: 'h1Heading',
       title: 'H1 Heading',
       type: 'string',
