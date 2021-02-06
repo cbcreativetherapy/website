@@ -42,6 +42,9 @@ const ContactPageStyles = styled.div`
     @media (max-width: 730px) {
       width: 95%;
     }
+    .gotcha {
+      display: none;
+    }
 
     .first-name,
     .last-name,
@@ -208,7 +211,8 @@ export default function Contact({ data: { contactPage } }) {
           <section className="intro">
             <PortableText blocks={contactPage._rawIntroParagraph} />
           </section>
-          <form action="">
+          <form action="https://formspree.io/f/xeqpdppy" method="POST">
+            <input type="text" name="_gotcha" className="gotcha" />
             <label htmlFor="firstName" className="first-name">
               First Name
               <input
