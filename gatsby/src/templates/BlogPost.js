@@ -265,7 +265,7 @@ export default function BlogPost({ data }) {
         </section>
         <section className="blog-post">
           <div className="back-to">
-            <Link to="/response-art" className="back-link">
+            <Link to="/blog" className="back-link">
               <HiArrowLeft className="back-arrow" />
               Back to Blog
             </Link>

@@ -70,6 +70,9 @@ const PreviewCardStyles = styled.div`
   .post-date {
     padding-bottom: 0;
     align-self: end;
+    @media (max-width: 600px) {
+      margin-top: 1rem;
+    }
   }
   .author {
     text-decoration: underline solid transparent;
