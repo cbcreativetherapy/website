@@ -7,7 +7,7 @@ export default {
     title: 'CB Creative Therapy',
     siteUrl: 'https://cbcreativetherapy.ca',
     description:
-      'Cassandra Brennan: art therapist and all around legendary human',
+      'Cassandra is a Creative Arts Therapist who uses Cognitive Behavioral Therapy, psychotherapy and artistic self-expression to collaborate with her clients in their care.',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
