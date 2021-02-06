@@ -1,0 +1,6 @@
+User-agent: *
+Allow: *.jpg
+Allow: *.js
+Allow: *.css
+Sitemap: https://junocollege.com/sitemap.xml
+Host: https://junocollege.com
