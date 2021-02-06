@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql, Link } from 'gatsby';
 import styled from 'styled-components';
 import PortableText from '@sanity/block-content-to-react';
+import { HiArrowLeft } from 'react-icons/hi';
 
 import HeroHeader from '../components/HeroHeader';
 import CtaBanner from '../components/CtaBanner';
@@ -25,14 +26,65 @@ const BlogPostStyles = styled.div`
       }
     }
     .author {
-      margin-left: 8rem;
+      margin: 0 8rem;
+      @media (max-width: 927px) {
+        margin: 0 4rem;
+      }
       @media (max-width: 605px) {
-        margin-left: 0;
+        margin: 1rem 0;
+      }
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      @media (max-width: 835px) {
         margin-top: 1rem;
+      }
+      @media (max-width: 605px) {
+        margin-top: 0;
+      }
+      .tag {
+        margin-right: 0.5rem;
+      }
+      .tag-link {
+        color: var(--accent-blue);
+        padding: 0.5rem;
+        margin: 0 1rem 0 0;
+        text-decoration: underline solid transparent;
+        transition: text-decoration 0.4s;
+        &:hover,
+        &:focus {
+          text-decoration: underline solid var(--accent-blue);
+          transition: text-decoration 0.4s;
+        }
       }
     }
   }
+  .back-link {
+    font-size: 2rem;
+    display: inline-block;
+    padding-bottom: 3px;
+    color: var(--dark-green);
+    border-bottom: 1px solid var(--pale-grey-bg);
+    transition: border-bottom 0.4s;
+    position: relative;
+    top: -15px;
+    left: 5%;
+
+    &:hover,
+    &:focus {
+      border-bottom: 1px solid var(--dark-green);
+      transition: border-bottom 0.4s;
+    }
+
+    .back-arrow {
+      position: relative;
+      top: 3px;
+      margin-right: 1rem;
+    }
+  }
   .blog-post {
+    position: relative;
     padding: 4rem 0;
     background-color: var(--pale-grey-bg);
     font-size: 1.5rem;
@@ -145,7 +197,8 @@ const BlogPostStyles = styled.div`
   }
 `;
 
-export default function BlogPost({ data: { post } }) {
+export default function BlogPost({ data }) {
+  const { post } = data;
   const serializers = {
     types: {
       block: (props) => {
@@ -183,20 +236,45 @@ export default function BlogPost({ data: { post } }) {
         <section className="author-block">
           <div className="wrapper">
             <p className="date">{post.publishDate}</p>
-            <p className="author">
-              Written by{' '}
-              <Link to="/about" className="link">
-                Cassandra Brennan
-              </Link>
-            </p>
+            {post.author ? (
+              <p className="author">
+                Written by{' '}
+                <Link to={post.authorLink} className="link">
+                  {post.author}
+                </Link>
+              </p>
+            ) : (
+              <p className="author">
+                Written by{' '}
+                <Link to="/about" className="link">
+                  Cassandra Brennan
+                </Link>
+              </p>
+            )}
+            <ul className="tags">
+              <li className="tag">Tags:</li>
+              {post.category.map((tag) => (
+                <li key={tag._key}>
+                  <Link className="tag-link" to={`/blog/${tag.slug.current}`}>
+                    {tag.categoryName}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
         <section className="blog-post">
+          <div className="back-to">
+            <Link to="/response-art" className="back-link">
+              <HiArrowLeft className="back-arrow" />
+              Back to Blog
+            </Link>
+          </div>
           <div className="wrapper">
             <PortableText
               blocks={post._rawPost}
               serializers={serializers}
-              projectId="7ehdot7l"
+              projectId={process.env.GATSBY_SANITY_PROJECT_ID}
               dataset="production"
             />
           </div>
@@ -216,6 +294,13 @@ export const query = graphql`
       publishDate(formatString: "MMMM D, YYYY")
       author
       authorLink
+      category {
+        _key
+        categoryName
+        slug {
+          current
+        }
+      }
       heroImage {
         imageFile {
           asset {

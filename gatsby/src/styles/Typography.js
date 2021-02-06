@@ -48,22 +48,22 @@ p, li {
 }
 
 .link {
-  color: var(--accent-coral);
+  color: var(--dark-green);
   border-bottom: 1px solid var(--main-bg);
   transition: border-bottom 0.3s;
   &:hover, 
   &:focus {
-    border-bottom: 1px solid var(--accent-coral);
+    border-bottom: 1px solid var(--dark-green);
     transition: border-bottom 0.3s;
   }
 }
 .link-blue {
-  color: var(--accent-blue);
+  color: var(--dark-green);
   border-bottom: 1px solid var(--main-bg);
   transition: border-bottom 0.3s;
   &:hover,
   &:focus {
-    border-bottom: 1px solid var(--accent-blue);
+    border-bottom: 1px solid var(--dark-green);
     transition: border-bottom 0.3s;
   }
 }

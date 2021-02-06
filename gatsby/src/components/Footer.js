@@ -3,6 +3,7 @@ import { graphql, Link, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
 import { FaInstagram } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
+import Hexagon from './svg/Hexagon';
 
 const FooterStyles = styled.footer`
   padding: 5vh 0;
@@ -23,8 +24,16 @@ const FooterStyles = styled.footer`
   }
 
   .logo {
-    width: 75px;
-    margin-right: 1rem;
+    width: 100px;
+    svg {
+      width: 100%;
+      height: auto;
+      polygon {
+        fill: var(--light-green);
+        stroke: var(--light-green);
+        transition: fill 0.6s;
+      }
+    }
   }
   .latest-blog {
     width: calc(60% - 75px);
@@ -59,25 +68,28 @@ const FooterStyles = styled.footer`
     a {
       font-size: 1.1rem;
       position: relative;
+      color: var(--dark-green);
+      transition: color 0.2s;
 
       &:hover,
       &:focus {
-        color: var(--accent-blue);
-        transition: color 0.3s;
+        color: var(--mid-green);
+        transition: color 0.2s;
 
         & .social-icon {
-          color: var(--accent-blue);
-          transition: color 0.3s;
+          color: var(--mid-green);
+          transition: color 0.2s;
         }
       }
     }
 
     .social-icon {
       font-size: 1.6rem;
-      color: var(--text-color);
+      color: var(--dark-green);
       position: absolute;
       left: -20px;
       top: -1px;
+      transition: color 0.2s;
     }
   }
 
@@ -95,12 +107,6 @@ const FooterStyles = styled.footer`
         margin: 0.3rem 0;
       }
     }
-  }
-
-  .placeholder-logo {
-    width: 75px;
-    height: 75px;
-    background-color: var(--light-green);
   }
 `;
 
@@ -122,7 +128,7 @@ export default function Footer() {
   return (
     <FooterStyles className="wrapper">
       <div className="logo">
-        <div className="placeholder-logo" />
+        <Hexagon />
       </div>
       <div className="latest-blog">
         <p>
@@ -137,16 +143,30 @@ export default function Footer() {
         <ul>
           <li>
             <div>
-              <a href="https://www.instagram.com/createwithcassandra/">
-                <FaInstagram className="social-icon" />
+              <a
+                href="https://www.instagram.com/createwithcassandra/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <FaInstagram
+                  className="social-icon"
+                  aria-label="Instagram icon"
+                />
                 createwithcassandra
               </a>
             </div>
           </li>
           <li>
             <div>
-              <a href="#">
-                <HiOutlineMail className="social-icon" />
+              <a
+                href="mailto:cbcreativetherapy@gmail.com"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <HiOutlineMail
+                  className="social-icon"
+                  aria-label="Email icon"
+                />
                 Shoot me an email
               </a>
             </div>
@@ -163,7 +183,12 @@ export default function Footer() {
         <p>&copy; CB Therapy {new Date().getFullYear()}</p>
         <p>
           Developed by:{' '}
-          <a className="link link-blue" href="https://codeturkie.io">
+          <a
+            className="link link-blue"
+            target="_blank"
+            rel="noreferrer"
+            href="https://codeturkie.io"
+          >
             Philip Turkiewicz
           </a>
         </p>

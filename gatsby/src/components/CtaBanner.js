@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const CtaBannerStyles = styled.section`
-  padding: 9rem 0;
+  padding: 6.5rem 0;
   background-color: var(--grey-bg);
 
   h3 {

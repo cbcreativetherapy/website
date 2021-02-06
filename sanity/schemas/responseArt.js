@@ -32,6 +32,13 @@ export default {
       },
     },
     {
+      name: 'description',
+      type: 'string',
+      title: 'Description',
+      description:
+        'Include a brief description of the art piece that will appear under the date.',
+    },
+    {
       name: 'sessionDate',
       title: 'Session Date',
       type: 'date',

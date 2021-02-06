@@ -28,6 +28,33 @@ async function turnBlogPostsIntoPages({ graphql, actions }) {
   });
 }
 
+async function turnResponseArtIntoPages({ graphql, actions }) {
+  const ResponseArtTemplate = path.resolve('./src/templates/ResponseArt.js');
+
+  const { data } = await graphql(`
+    query {
+      responseArt: allSanityResponseArt {
+        nodes {
+          name
+          slug {
+            current
+          }
+        }
+      }
+    }
+  `);
+
+  data.responseArt.nodes.forEach((post) => {
+    actions.createPage({
+      path: `response-art/${post.slug.current}`,
+      component: ResponseArtTemplate,
+      context: {
+        slug: post.slug.current,
+      },
+    });
+  });
+}
+
 async function turnCategoriesIntoPages({ graphql, actions }) {
   const BlogCategoryTemplate = path.resolve('./src/pages/blog.js');
 
@@ -59,6 +86,7 @@ async function turnCategoriesIntoPages({ graphql, actions }) {
 export async function createPages(params) {
   await Promise.all([
     turnBlogPostsIntoPages(params),
+    turnResponseArtIntoPages(params),
     turnCategoriesIntoPages(params),
   ]);
 }

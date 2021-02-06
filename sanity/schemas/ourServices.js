@@ -45,6 +45,11 @@ export default {
       type: 'contentBlockArray',
     },
     {
+      name: 'modalities',
+      title: 'Modalities Section',
+      type: 'genericContentBlock',
+    },
+    {
       name: 'ctaBannerReference',
       title: 'Call to Action Banner Reference',
       type: 'reference',

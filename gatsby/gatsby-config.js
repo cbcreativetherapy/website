@@ -12,13 +12,22 @@ export default {
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-styled-components',
+    'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-source-sanity',
       options: {
-        projectId: '7ehdot7l',
+        projectId: process.env.SANITY_PROJECT_ID,
         dataset: 'production',
         watchMode: true,
         token: process.env.SANITY_TOKEN,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: 'https://junocollege.com',
+        sitemap: 'https://junocollege.com/sitemap.xml',
+        policy: [{ userAgent: '*', allow: ['*.jpg', '*.js', '*.css'] }],
       },
     },
   ],

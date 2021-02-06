@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import styled from 'styled-components';
 import PortableText from '@sanity/block-content-to-react';
 
@@ -11,7 +12,7 @@ const OurServicesStyles = styled.div`
   .services-section {
     padding: 6rem 10rem;
     margin: 0 auto;
-    &:nth-of-type(2n) {
+    &:nth-of-type(even) {
       background-color: var(--pale-grey-bg);
     }
 
@@ -34,6 +35,13 @@ const OurServicesStyles = styled.div`
     }
     @media (max-width: 425px) {
       padding: 4rem 2rem;
+      h2 {
+        font-size: 2.4rem;
+      }
+      p,
+      li {
+        font-size: 1.3rem;
+      }
     }
   }
   .section1 {
@@ -52,21 +60,44 @@ const OurServicesStyles = styled.div`
       margin-left: 25px;
     }
   }
+  .modalities {
+    .wrapper {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .text-container {
+      width: 50%;
+      @media (max-width: 800px) {
+        width: 100%;
+      }
+    }
+    .gatsby-image-wrapper {
+      width: 40%;
+      margin: 0 2rem 2rem;
+      @media (max-width: 800px) {
+        width: 100%;
+        margin: 2rem 0;
+      }
+    }
+  }
 `;
 
-const sectionNumberCycle = ((max) => {
-  let count = 0;
-  // eslint-disable-next-line no-plusplus
-  return () => (count++ % max) + 1;
-})(3);
-
 export default function About({ data: { ourServicesPage } }) {
-  console.log(ourServicesPage);
+  const numberOfSections = ourServicesPage.sectionsArray.length;
+
+  const sectionNumberCycle = ((max) => {
+    let count = 0;
+    // eslint-disable-next-line no-plusplus
+    return () => (count++ % max) + 1;
+  })(numberOfSections);
+
   return (
     <>
       <SEO
         title={ourServicesPage.metaContent.title}
-        description={ourServicesPage.metaContent.description[0].children.text}
+        description={
+          ourServicesPage.metaContent.description[0].children[0].text
+        }
         image={ourServicesPage.metaContent.image.imageFile.asset.fluid.src}
       />
       <OurServicesStyles>
@@ -86,7 +117,22 @@ export default function About({ data: { ourServicesPage } }) {
             </div>
           </section>
         ))}
-        <CtaBanner bannerHeading={ourServicesPage.ctaBannerReference.heading} />
+        <section className="services-section modalities">
+          <div className="wrapper">
+            <div className="text-container">
+              <h2>{ourServicesPage.modalities.heading}</h2>
+              <PortableText blocks={ourServicesPage.modalities._rawParagraph} />
+            </div>
+            <Img
+              fluid={ourServicesPage.modalities.image.imageFile.asset.fluid}
+              alt={ourServicesPage.modalities.image.imageAltText}
+            />
+          </div>
+        </section>
+        <CtaBanner
+          bannerHeading={ourServicesPage.ctaBannerReference.heading}
+          bannerText={ourServicesPage.ctaBannerReference.subHeading}
+        />
       </OurServicesStyles>
     </>
   );
@@ -129,8 +175,23 @@ export const query = graphql`
         heading
         _rawParagraph
       }
+      modalities {
+        heading
+        _rawParagraph
+        image {
+          imageAltText
+          imageFile {
+            asset {
+              fluid(maxWidth: 1200) {
+                ...GatsbySanityImageFluid
+              }
+            }
+          }
+        }
+      }
       ctaBannerReference {
         heading
+        subHeading
       }
     }
   }

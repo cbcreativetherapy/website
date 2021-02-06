@@ -54,11 +54,11 @@ const NavStyles = styled.nav`
       left: 3px;
       bottom: 8px;
       z-index: -10;
-      transition: width 0.3s;
+      transition: width 0.5s;
     }
     a:hover:after {
       width: 99.5%;
-      transition: width 0.3s;
+      transition: width 0.5s;
     }
 
     span {
@@ -311,6 +311,10 @@ export default function Nav() {
     isBlogChevronClicked(false);
   };
 
+  const handleRemoveFocus = () => {
+    document.activeElement.blur();
+  };
+
   return (
     <NavStyles>
       <div className="wrapper">
@@ -330,7 +334,11 @@ export default function Nav() {
                   className="chevron"
                   onClick={aboutChevronClick}
                 />
-                <Link className="heading" to="/about">
+                <Link
+                  className="heading"
+                  to="/about"
+                  onClick={handleRemoveFocus}
+                >
                   About
                 </Link>
                 <ul
@@ -339,18 +347,28 @@ export default function Nav() {
                   }`}
                 >
                   <li>
-                    <Link to="/our-services">Our Services</Link>
+                    <Link to="/our-services" onClick={handleRemoveFocus}>
+                      Our Services
+                    </Link>
                   </li>
                   <li>
-                    <Link to="/resources">Helpful Resources</Link>
+                    <Link to="/resources" onClick={handleRemoveFocus}>
+                      Helpful Resources
+                    </Link>
                   </li>
                   <li>
-                    <Link to="/contact">Get In Touch</Link>
+                    <Link to="/contact" onClick={handleRemoveFocus}>
+                      Get In Touch
+                    </Link>
                   </li>
                 </ul>
               </li>
               <li className="blog">
-                <Link className="heading" to="/blog">
+                <Link
+                  className="heading"
+                  to="/blog"
+                  onClick={handleRemoveFocus}
+                >
                   Blog
                 </Link>
                 <HiChevronDown className="chevron" onClick={blogChevronClick} />
@@ -360,7 +378,9 @@ export default function Nav() {
                   }`}
                 >
                   <li>
-                    <Link to="/response-art">Response Art Gallery</Link>
+                    <Link to="/response-art" onClick={handleRemoveFocus}>
+                      Response Art Gallery
+                    </Link>
                   </li>
                 </ul>
               </li>

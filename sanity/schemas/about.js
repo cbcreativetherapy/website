@@ -2,16 +2,6 @@ export default {
   name: 'about',
   title: 'About Page',
   type: 'document',
-  fieldsets: [
-    {
-      name: 'heroContent',
-      title: 'Hero Content',
-      options: {
-        collapsible: true,
-        collapsed: false,
-      },
-    },
-  ],
   fields: [
     {
       name: 'metaContent',
@@ -22,27 +12,25 @@ export default {
       name: 'h1Heading',
       title: 'H1 Heading',
       type: 'string',
-      fieldset: 'heroContent',
       description: 'Main title for the page.',
     },
     {
-      name: 'heroParagraph',
-      title: 'Hero Paragraph',
-      type: 'text',
-      fieldset: 'heroContent',
-      description: 'Text appears under the main title for the page.',
+      name: 'aboutParagraph',
+      title: 'About Paragraph',
+      type: 'array',
+      of: [{ type: 'block' }],
+      description: 'About paragraph that wraps around the headshot.',
     },
     {
-      name: 'heroImage',
-      title: 'Hero Image',
+      name: 'headshot',
+      title: 'Headshot',
       type: 'reference',
       to: [{ type: 'imageBlock' }],
-      fieldset: 'heroContent',
     },
     {
-      name: 'sectionsArray',
-      title: 'Sections Array',
-      type: 'contentBlockArray',
+      name: 'professionalAffiliations',
+      title: 'Professional Affiliations',
+      type: 'genericContentBlock',
     },
     {
       name: 'ctaBannerReference',

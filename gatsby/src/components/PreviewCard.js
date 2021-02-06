@@ -18,7 +18,8 @@ const PreviewCardStyles = styled.div`
   border-radius: 2px;
   box-shadow: 0px 0px 0px white;
   transition: box-shadow 0.4s;
-  &:hover {
+  &:hover,
+  &:focus-within {
     box-shadow: 7px 7px 5px var(--grey-bg);
     transition: box-shadow 0.4s;
 
@@ -55,7 +56,8 @@ const PreviewCardStyles = styled.div`
       border-radius: 4px;
       transition: width 0.4s;
     }
-    &:hover {
+    &:hover,
+    &:focus {
       text-decoration: underline solid var(--text-color);
       transition: text-decoration 0.4s;
     }
@@ -72,7 +74,8 @@ const PreviewCardStyles = styled.div`
   .author {
     text-decoration: underline solid transparent;
     transition: text-decoration 0.4s;
-    &:hover {
+    &:hover,
+    &:focus {
       text-decoration: underline solid var(--text-color);
       transition: text-decoration 0.4s;
     }
@@ -83,7 +86,10 @@ export default function PreviewCard({ post }) {
   return (
     <PreviewCardStyles>
       <Link to={`/post/${post.slug.current}`} className="picture-link">
-        <Img fluid={post.heroImage.imageFile.asset.fluid} />
+        <Img
+          fluid={post.heroImage.imageFile.asset.fluid}
+          alt={post.heroImage.imageAltText}
+        />
       </Link>
       <Link to={`/post/${post.slug.current}`} className="post-title">
         <h2>{post.postTitle}</h2>
@@ -93,6 +99,8 @@ export default function PreviewCard({ post }) {
         <a
           className="author"
           href={post.authorLink}
+          target="_blank"
+          rel="noreferrer"
         >{`Written by ${post.author}`}</a>
       ) : (
         <Link to="/about" className="author">

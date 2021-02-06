@@ -106,12 +106,11 @@ const HomePageStyles = styled.div`
 `;
 
 export default function HomePage({ data: { homePage } }) {
-  console.log(homePage);
   return (
     <>
       <SEO
         title={homePage.metaContent.title}
-        description={homePage.metaContent.description[0].children.text}
+        description={homePage.metaContent.description[0].children[0].text}
         image={homePage.metaContent.image.imageFile.asset.fluid.src}
       />
       <HomePageStyles>
