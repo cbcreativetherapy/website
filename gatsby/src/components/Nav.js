@@ -13,6 +13,7 @@ const NavStyles = styled.nav`
   }
 
   li,
+  button,
   .dropdown-hover,
   .nav-banner {
     font-size: 2rem;
@@ -61,7 +62,8 @@ const NavStyles = styled.nav`
       transition: width 0.5s;
     }
 
-    span {
+    span,
+    button {
       font-size: 3rem;
       font-family: RalewayReg;
       @media (max-width: 410px) {
@@ -73,31 +75,62 @@ const NavStyles = styled.nav`
   .nav {
     flex: 1 0 360px;
     align-self: flex-end;
-    padding-bottom: 1rem;
     margin-left: 1rem;
   }
   .nav-container {
     display: flex;
     align-items: flex-end;
     position: relative;
-    z-index: 10;
 
+    .about {
+      cursor: default;
+      position: relative;
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+        width: 200%;
+        background-color: var(--main-bg);
+        z-index: 30;
+        pointer-events: none;
+      }
+      & > button {
+        background-color: transparent;
+        border: none;
+        position: relative;
+        z-index: 40 !important;
+        &::after {
+          content: '';
+          display: block;
+          position: absolute;
+          z-index: -1;
+          height: 18px;
+          width: 0;
+          bottom: 12px;
+          left: 9px;
+          background-color: var(--accent-coral);
+          transition: width 0.3s;
+          opacity: 0.8;
+        }
+      }
+      &:hover > button::after,
+      &:focus-within > button::after {
+        width: 78.5%;
+      }
+    }
     .about,
     .blog {
       position: relative;
-      background-color: none;
-      transition: background-color 0.3s;
 
       &:hover .dropdown-links,
       &:focus-within .dropdown-links {
         visibility: visible;
         opacity: 1;
-        transition: visibility 0.3s, opacity 0.3s;
-      }
-      &:hover .heading,
-      &:focus-within .heading {
-        background-color: var(--light-green);
-        transition: background-color 0.3s;
+        top: 43px;
+        transition: visibility 0.3s, opacity 0.3s, top 0.3s;
       }
 
       .heading {
@@ -111,17 +144,44 @@ const NavStyles = styled.nav`
 
     .blog {
       margin-left: 8rem;
+      & span {
+        position: relative;
+        text-decoration: solid underline transparent;
+        transition: text-decoration 0.3s !important;
+        &:hover,
+        &:focus-within {
+          text-decoration: solid underline var(--text-color);
+        }
+
+        &::after {
+          content: '';
+          display: block;
+          position: absolute;
+          z-index: -1;
+          height: 18px;
+          width: 0;
+          bottom: 12px;
+          left: 9px;
+          background-color: var(--accent-coral);
+          transition: width 0.3s;
+          opacity: 0.8;
+        }
+        &:hover::after,
+        &:focus-within::after {
+          width: 83.5%;
+        }
+      }
     }
 
     .dropdown-links {
       position: absolute;
-      width: 160px;
+      width: 180px;
       top: 33px;
       background-color: var(--light-green);
       padding: 0.1rem 0.5rem;
       visibility: hidden;
       opacity: 0;
-      transition: background-color 0.3s, visibility 0.3s, opacity 0.3s;
+      transition: background-color 0.3s, visibility 0.3s, opacity 0.3s, top 0.3s;
 
       a {
         display: inline-block;
@@ -129,11 +189,13 @@ const NavStyles = styled.nav`
         padding: 0.5rem;
         margin: 5px 0;
         background-color: none;
-        transition: background-color 0.3s;
+        text-decoration: underline solid transparent;
+        transition: background-color 0.3s, text-decoration 0.3s;
         position: relative;
         z-index: 30;
         &:hover,
         &:focus {
+          text-decoration: underline solid var(--text-color);
           background-color: rgba(100, 200, 100, 0.5);
           transition: background-color 0.3s;
         }
@@ -180,7 +242,7 @@ const NavStyles = styled.nav`
     z-index: 30;
     font-size: 40px;
     color: var(--text-color);
-    border-radius: 50%;
+    border-radius: 4px;
     background-color: none;
     transition: background-color 0.3s;
 
@@ -190,6 +252,10 @@ const NavStyles = styled.nav`
       transition: background-color 0.3s;
     }
   }
+  .hamburger-click {
+    background-color: var(--accent-coral);
+    transition: background-color 0.3s;
+  }
   .chevron {
     cursor: pointer;
     display: none;
@@ -198,13 +264,8 @@ const NavStyles = styled.nav`
     top: 2px;
     font-size: 30px;
     z-index: 40;
-    transition: background-color 0.3s;
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.1);
-      transition: background-color 0.3s;
-    }
   }
-  @media (max-width: 780px) {
+  @media (max-width: 791px) {
     .hamburger,
     .chevron {
       display: block;
@@ -231,6 +292,13 @@ const NavStyles = styled.nav`
       .blog {
         margin-left: 0;
         width: 210px;
+        &::before {
+          display: none;
+        }
+        & span::after,
+        & button::after {
+          display: none;
+        }
 
         &:hover .dropdown-links,
         &:focus-within .dropdown-links {
@@ -261,6 +329,11 @@ const NavStyles = styled.nav`
             transition: background-color 0.3s;
           }
         }
+      }
+
+      .about .heading {
+        width: 175px;
+        cursor: pointer;
       }
 
       .dropdown-links {
@@ -295,24 +368,26 @@ const NavStyles = styled.nav`
 
 export default function Nav({ blogStatus }) {
   const [aboutChevronClicked, isAboutChevronClicked] = useState(false);
-  const [blogChevronClicked, isBlogChevronClicked] = useState(false);
+  // const [blogChevronClicked, isBlogChevronClicked] = useState(false);
   const [hamburgerIconClicked, isHamburgerIconClicked] = useState(false);
 
   const aboutChevronClick = () => {
     isAboutChevronClicked(!aboutChevronClicked);
   };
-  const blogChevronClick = () => {
-    isBlogChevronClicked(!blogChevronClicked);
-  };
+  // const blogChevronClick = () => {
+  //   isBlogChevronClicked(!blogChevronClicked);
+  // };
 
   const hamburgerClicked = () => {
     isHamburgerIconClicked(!hamburgerIconClicked);
     isAboutChevronClicked(false);
-    isBlogChevronClicked(false);
+    // isBlogChevronClicked(false);
   };
 
   const handleRemoveFocus = () => {
     document.activeElement.blur();
+    isHamburgerIconClicked(false);
+    isAboutChevronClicked(false);
   };
 
   return (
@@ -321,10 +396,15 @@ export default function Nav({ blogStatus }) {
         <ul className="visible-nav">
           <li className="logo">
             <Link to="/">
-              Cassandra Brennan <span>M.A, RPQ</span>
+              Cassandra Brennan <span>M.A</span>
             </Link>
           </li>
-          <HiMenu className="hamburger" onClick={hamburgerClicked} />
+          <HiMenu
+            className={`hamburger ${
+              hamburgerIconClicked ? 'hamburger-click' : ''
+            }`}
+            onClick={hamburgerClicked}
+          />
           <li
             className={`nav ${hamburgerIconClicked ? 'hamburger-click' : ''}`}
           >
@@ -334,18 +414,23 @@ export default function Nav({ blogStatus }) {
                   className="chevron"
                   onClick={aboutChevronClick}
                 />
-                <Link
+                <button
+                  type="button"
                   className="heading"
-                  to="/about"
-                  onClick={handleRemoveFocus}
+                  onClick={aboutChevronClick}
                 >
                   About
-                </Link>
+                </button>
                 <ul
                   className={`dropdown-links ${
                     aboutChevronClicked ? 'chevron-click' : ''
                   }`}
                 >
+                  <li>
+                    <Link to="/about" onClick={handleRemoveFocus}>
+                      About CB Therapy
+                    </Link>
+                  </li>
                   <li>
                     <Link to="/our-services" onClick={handleRemoveFocus}>
                       Our Services
@@ -365,32 +450,15 @@ export default function Nav({ blogStatus }) {
               </li>
               {blogStatus && (
                 <li className="blog">
-                  <Link
-                    className="heading"
-                    to="/blog"
-                    onClick={handleRemoveFocus}
-                  >
-                    Blog
+                  <Link to="/blog" onClick={handleRemoveFocus}>
+                    <span className="heading">Blog</span>
                   </Link>
-                  <HiChevronDown
-                    className="chevron"
-                    onClick={blogChevronClick}
-                  />
-                  {/* <ul
-                    className={`dropdown-links ${
-                      blogChevronClicked ? 'chevron-click' : ''
-                    }`}
-                  >
-                    <li>
-                      <Link to="/response-art" onClick={handleRemoveFocus}>
-                        Response Art Gallery
-                      </Link>
-                    </li>
-                  </ul> */}
                 </li>
               )}
               <li className="blog">
-                <Link to="/response-art">Gallery</Link>
+                <Link to="/response-art" onClick={handleRemoveFocus}>
+                  <span className="heading">Gallery</span>
+                </Link>
               </li>
             </ul>
           </li>

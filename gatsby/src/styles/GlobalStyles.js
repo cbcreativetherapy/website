@@ -39,7 +39,7 @@ img {
   display: block;
 }
 
-h1, h2, h3, h4, p, a, ul, li {
+h1, h2, h3, h4, p, a, ul, li, button {
   font-weight: normal;
   margin: 0;
   padding: 0;

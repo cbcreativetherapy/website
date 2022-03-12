@@ -90,7 +90,7 @@ const BlogStyles = styled.div`
   }
   .posts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(345px, 1fr));
     grid-auto-rows: 350px auto auto auto;
     gap: 4rem;
     @media (max-width: 420px) {
