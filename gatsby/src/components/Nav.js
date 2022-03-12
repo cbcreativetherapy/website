@@ -442,6 +442,11 @@ export default function Nav({ blogStatus }) {
                     </Link>
                   </li>
                   <li>
+                    <Link to="/faq" onClick={handleRemoveFocus}>
+                      FAQ
+                    </Link>
+                  </li>
+                  <li>
                     <Link to="/contact" onClick={handleRemoveFocus}>
                       Get In Touch
                     </Link>
@@ -462,70 +467,6 @@ export default function Nav({ blogStatus }) {
               </li>
             </ul>
           </li>
-          {/* <li className="dropdown-hover about-heading">
-            <p
-              // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-              tabIndex="0"
-              onMouseEnter={() => setIsAboutDropdownShown(true)}
-              onMouseLeave={() => setIsAboutDropdownShown(false)}
-              onFocus={() => setIsAboutDropdownShown(true)}
-              onBlur={() => setIsAboutDropdownShown(false)}
-              className={isAboutDropdownShown ? 'dropdown-visible' : ''}
-            >
-              About <HiChevronDown className="chevron" />
-            </p>
-            <ul
-              onMouseEnter={() => setIsAboutDropdownShown(true)}
-              onMouseLeave={() => setIsAboutDropdownShown(false)}
-              onFocus={() => setIsAboutDropdownShown(true)}
-              onBlur={() => setIsAboutDropdownShown(false)}
-              className={`dropdown about ${
-                isAboutDropdownShown ? 'dropdown-visible' : ''
-              }`}
-            >
-              <li>
-                <Link to="/about">About CB Therapy</Link>
-              </li>
-              <li>
-                <Link to="/our-services">Our Services</Link>
-              </li>
-              <li>
-                <Link to="/resources">Helpful Resources</Link>
-              </li>
-              <li>
-                <Link to="/contact">Get in Touch</Link>
-              </li>
-            </ul>
-          </li> */}
-          {/* <li className="dropdown-hover blog-heading">
-            <p
-              // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-              tabIndex="0"
-              onMouseEnter={() => setIsBlogDropdownShown(true)}
-              onMouseLeave={() => setIsBlogDropdownShown(false)}
-              onFocus={() => setIsBlogDropdownShown(true)}
-              onBlur={() => setIsBlogDropdownShown(false)}
-              className={isBlogDropdownShown ? 'dropdown-visible' : ''}
-            >
-              Blog <HiChevronDown className="chevron" />
-            </p>
-            <ul
-              onMouseEnter={() => setIsBlogDropdownShown(true)}
-              onMouseLeave={() => setIsBlogDropdownShown(false)}
-              onFocus={() => setIsBlogDropdownShown(true)}
-              onBlur={() => setIsBlogDropdownShown(false)}
-              className={`dropdown blog ${
-                isBlogDropdownShown ? 'dropdown-visible' : ''
-              }`}
-            >
-              <li>
-                <Link to="/blog">Our Posts</Link>
-              </li>
-              <li>
-                <Link to="/response-art">Response Art Gallery</Link>
-              </li>
-            </ul>
-          </li> */}
         </ul>
       </div>
 
