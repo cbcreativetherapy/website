@@ -16,9 +16,9 @@ const HeroHeaderStyles = styled.header`
     display: flex;
     width: 100%;
     height: 100%;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    /* text-align: center; */
+    text-align: center;
   }
 
   .center-container {

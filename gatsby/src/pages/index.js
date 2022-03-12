@@ -7,17 +7,21 @@ import HeroHeader from '../components/HeroHeader';
 import CtaBanner from '../components/CtaBanner';
 import Hexagon from '../components/svg/Hexagon';
 import SEO from '../components/SEO';
+import InitialsLogo from '../assets/images/logo-initials.svg';
 
 const HomePageStyles = styled.div`
   .introduction {
     padding: 11rem 0;
     width: 80%;
     margin: 0 auto;
+    display: flex;
+    @media (max-width: 960px) {
+      display: block;
+    }
     @media (max-width: 680px) {
       width: 100%;
       padding: 8rem 0;
     }
-
     h2 {
       font-size: 4rem;
     }
@@ -26,8 +30,15 @@ const HomePageStyles = styled.div`
       font-size: 1.6rem;
       line-height: 1.6;
       width: 80%;
-      @media (max-width: 680px) {
+      @media (max-width: 960px) {
         width: 100%;
+      }
+    }
+    .intro-logo {
+      width: 300px;
+      margin: -4rem;
+      @media (max-width: 960px) {
+        margin: 2rem auto -6rem;
       }
     }
   }
@@ -120,8 +131,15 @@ export default function HomePage({ data: { homePage } }) {
         />
         <div className="wrapper">
           <section className="introduction">
-            <h2>{homePage.introSection.heading}</h2>
-            <PortableText blocks={homePage.introSection._rawParagraph} />
+            <div className="content-wrapper">
+              <h2>{homePage.introSection.heading}</h2>
+              <PortableText blocks={homePage.introSection._rawParagraph} />
+            </div>
+            <img
+              className="intro-logo"
+              src={InitialsLogo}
+              alt="Logo for CB Creative Therapy"
+            />
           </section>
         </div>
         <section className="site-preview">

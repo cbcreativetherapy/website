@@ -22,19 +22,19 @@ export default function SEO({ children, location, description, title, image }) {
       <link
         rel="apple-touch-icon"
         sizes="180x180"
-        href="/apple-touch-icon.png"
+        href="/cassandabrennan-white.svg"
       />
       <link
         rel="icon"
         type="image/png"
         sizes="32x32"
-        href="/favicon-32x32.png"
+        href="/cassandabrennan-white.svg"
       />
       <link
         rel="icon"
         type="image/png"
         sizes="16x16"
-        href="/favicon-16x16.png"
+        href="/cassandabrennan-white.svg"
       />
       <link rel="manifest" href="/site.webmanifest" />
       {/* Meta Tags */}
@@ -46,8 +46,14 @@ export default function SEO({ children, location, description, title, image }) {
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twiter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image || '/logo.svg'} />
-      <meta property="og:image" content={image || '/logo.svg'} />
+      <meta
+        name="twitter:image"
+        content={image || '/cassandabrennan-white.svg'}
+      />
+      <meta
+        property="og:image"
+        content={image || '/cassandabrennan-white.svg'}
+      />
       <meta property="og:title" content={title} key="ogtitle" />
       <meta
         property="og:site_name"

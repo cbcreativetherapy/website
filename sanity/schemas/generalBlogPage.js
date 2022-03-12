@@ -22,6 +22,13 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'blogIsPublic',
+      type: 'boolean',
+      title: 'Make Blog Public',
+      description:
+        'Turn this on to show the blog on your website. This will reveal the blog in the menu & footer',
+    },
+    {
       name: 'ctaBannerReference',
       title: 'Call to Action Banner',
       type: 'reference',

@@ -293,7 +293,7 @@ const NavStyles = styled.nav`
   }
 `;
 
-export default function Nav() {
+export default function Nav({ blogStatus }) {
   const [aboutChevronClicked, isAboutChevronClicked] = useState(false);
   const [blogChevronClicked, isBlogChevronClicked] = useState(false);
   const [hamburgerIconClicked, isHamburgerIconClicked] = useState(false);
@@ -363,26 +363,34 @@ export default function Nav() {
                   </li>
                 </ul>
               </li>
+              {blogStatus && (
+                <li className="blog">
+                  <Link
+                    className="heading"
+                    to="/blog"
+                    onClick={handleRemoveFocus}
+                  >
+                    Blog
+                  </Link>
+                  <HiChevronDown
+                    className="chevron"
+                    onClick={blogChevronClick}
+                  />
+                  {/* <ul
+                    className={`dropdown-links ${
+                      blogChevronClicked ? 'chevron-click' : ''
+                    }`}
+                  >
+                    <li>
+                      <Link to="/response-art" onClick={handleRemoveFocus}>
+                        Response Art Gallery
+                      </Link>
+                    </li>
+                  </ul> */}
+                </li>
+              )}
               <li className="blog">
-                <Link
-                  className="heading"
-                  to="/blog"
-                  onClick={handleRemoveFocus}
-                >
-                  Blog
-                </Link>
-                <HiChevronDown className="chevron" onClick={blogChevronClick} />
-                <ul
-                  className={`dropdown-links ${
-                    blogChevronClicked ? 'chevron-click' : ''
-                  }`}
-                >
-                  <li>
-                    <Link to="/response-art" onClick={handleRemoveFocus}>
-                      Response Art Gallery
-                    </Link>
-                  </li>
-                </ul>
+                <Link to="/response-art">Gallery</Link>
               </li>
             </ul>
           </li>

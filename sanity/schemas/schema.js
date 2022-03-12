@@ -11,6 +11,7 @@ import about from './about';
 import contact from './contact';
 import ourServices from './ourServices';
 import resources from './resources';
+import faq from './faq';
 import generalBlogPage from './generalBlogPage';
 import generalGalleryPage from './generalGalleryPage';
 import blogPost from './blogPost';
@@ -35,6 +36,7 @@ export default createSchema({
     contact,
     ourServices,
     resources,
+    faq,
     generalBlogPage,
     generalGalleryPage,
     blogPost,

@@ -7,7 +7,7 @@ export default {
     title: 'CB Creative Therapy',
     siteUrl: 'https://cbcreativetherapy.ca',
     description:
-      'Cassandra is a Creative Arts Therapist who uses Cognitive Behavioral Therapy, psychotherapy and artistic self-expression to collaborate with her clients in their care.',
+      'Cassandra Brennan is a Creative Arts Therapist who uses Cognitive Behavioral Therapy, psychotherapy and artistic self-expression to collaborate with her clients in their care.',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -25,8 +25,8 @@ export default {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        host: 'https://junocollege.com',
-        sitemap: 'https://junocollege.com/sitemap.xml',
+        host: 'https://cbcreativetherapy.ca',
+        sitemap: 'https://cbcreativetherapy.ca/sitemap.xml',
         policy: [{ userAgent: '*', allow: ['*.jpg', '*.js', '*.css'] }],
       },
     },

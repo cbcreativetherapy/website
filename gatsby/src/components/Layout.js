@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { graphql, useStaticQuery } from 'gatsby';
 
 import Nav from './Nav';
 import Footer from './Footer';
@@ -28,6 +29,16 @@ const SkipLinkStyles = styled.a`
 `;
 
 export default function Layout({ children }) {
+  const blogStatusQuery = useStaticQuery(graphql`
+    query {
+      sanityGeneralBlogPage {
+        blogIsPublic
+      }
+    }
+  `);
+
+  const blogIsLive = blogStatusQuery.sanityGeneralBlogPage.blogIsPublic;
+
   return (
     <div>
       <SetupStyles />
@@ -36,11 +47,11 @@ export default function Layout({ children }) {
       <SkipLinkStyles href="#main" tabIndex={0}>
         Skip to main content
       </SkipLinkStyles>
-      <Nav />
+      <Nav blogStatus={blogIsLive} />
       <main role="main" id="main">
         {children}
       </main>
-      <Footer />
+      <Footer blogStatus={blogIsLive} />
     </div>
   );
 }

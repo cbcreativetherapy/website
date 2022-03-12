@@ -3,7 +3,7 @@ import { graphql, Link, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
 import { FaInstagram } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
-import Hexagon from './svg/Hexagon';
+import DetailedLogo from '../assets/images/logo-detailed.svg';
 
 const FooterStyles = styled.footer`
   padding: 5vh 0;
@@ -24,16 +24,9 @@ const FooterStyles = styled.footer`
   }
 
   .logo {
-    width: 100px;
-    svg {
-      width: 100%;
-      height: auto;
-      polygon {
-        fill: var(--light-green);
-        stroke: var(--light-green);
-        transition: fill 0.6s;
-      }
-    }
+    width: 200px;
+    position: relative;
+    left: -10px;
   }
   .latest-blog {
     width: calc(60% - 75px);
@@ -110,7 +103,7 @@ const FooterStyles = styled.footer`
   }
 `;
 
-export default function Footer() {
+export default function Footer({ blogStatus }) {
   const allBlogPosts = useStaticQuery(graphql`
     query {
       allSanityBlogPost {
@@ -128,16 +121,18 @@ export default function Footer() {
   return (
     <FooterStyles className="wrapper">
       <div className="logo">
-        <Hexagon />
+        <img src={DetailedLogo} alt="Logo for CB Creative Therapy" />
       </div>
-      <div className="latest-blog">
-        <p>
-          See our latest blog post -{' '}
-          <Link className="link-blue" to={blogSlug}>
-            {latestBlog[0].postTitle}
-          </Link>
-        </p>
-      </div>
+      {blogStatus && (
+        <div className="latest-blog">
+          <p>
+            See our latest blog post -{' '}
+            <Link className="link-blue" to={blogSlug}>
+              {latestBlog[0].postTitle}
+            </Link>
+          </p>
+        </div>
+      )}
       <div className="social-media">
         <h4>Let's connect!</h4>
         <ul>

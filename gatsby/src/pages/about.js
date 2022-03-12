@@ -51,8 +51,9 @@ const AboutPageStyles = styled.div`
       margin: 4rem auto;
     }
   }
-  .about-paragraph {
+  .clearfix p {
     font-size: 2rem;
+    line-height: 1.4;
     padding: 0 2rem;
     p:first-of-type {
       margin-bottom: 2rem;
