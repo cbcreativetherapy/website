@@ -154,7 +154,7 @@ export default function Footer({ blogStatus }) {
           <li>
             <div>
               <a
-                href="mailto:cbcreativetherapy@gmail.com"
+                href="mailto:cassandra@cbcreativetherapy.ca"
                 target="_blank"
                 rel="noreferrer"
               >
