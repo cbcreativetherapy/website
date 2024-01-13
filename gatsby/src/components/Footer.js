@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { FaInstagram } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
 import DetailedLogo from '../assets/images/logo-detailed.svg';
+import CleanLink from './CleanLink';
 
 const FooterStyles = styled.footer`
   padding: 5vh 0;
@@ -26,7 +27,11 @@ const FooterStyles = styled.footer`
   .logo {
     width: 200px;
     position: relative;
-    left: -10px;
+    left: -30px;
+    @media (max-width: 560px) {
+      position: static;
+      margin: 0 auto;
+    }
   }
   .latest-blog {
     width: calc(60% - 75px);
@@ -43,26 +48,31 @@ const FooterStyles = styled.footer`
     }
   }
   .social-media {
-    width: 30%;
-    text-align: right;
+    width: max-content;
     @media (max-width: 560px) {
       margin-top: 1.5rem;
       width: 100%;
-      text-align: left;
-      a {
-        margin-left: 20px;
+      text-align: center;
+    }
+    h4 {
+      margin: 1rem 0;
+      text-align: right;
+
+      @media (max-width: 560px) {
+        text-align: center;
       }
     }
-    h4,
+
     li {
-      margin: 1rem 0;
+      margin-bottom: 5px;
     }
 
     a {
       font-size: 1.1rem;
-      position: relative;
       color: var(--dark-green);
       transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
 
       &:hover,
       &:focus {
@@ -79,9 +89,7 @@ const FooterStyles = styled.footer`
     .social-icon {
       font-size: 1.6rem;
       color: var(--dark-green);
-      position: absolute;
-      left: -20px;
-      top: -1px;
+      margin-right: 5px;
       transition: color 0.2s;
     }
   }
@@ -96,14 +104,19 @@ const FooterStyles = styled.footer`
     }
     @media (max-width: 560px) {
       flex-direction: column;
+      align-items: center;
       p {
         margin: 0.3rem 0;
+
+        &:nth-of-type(2) {
+          order: 1;
+        }
       }
     }
   }
 `;
 
-export default function Footer({ blogStatus }) {
+export default function Footer({ blogStatus, socialLinks }) {
   const allBlogPosts = useStaticQuery(graphql`
     query {
       allSanityBlogPost {
@@ -118,6 +131,20 @@ export default function Footer({ blogStatus }) {
   `);
   const latestBlog = allBlogPosts.allSanityBlogPost.nodes.map((node) => node);
   const blogSlug = `/post/${latestBlog[0].slug.current}`;
+
+  const returnIcon = (type) => {
+    if (type === 'instagram') {
+      return (
+        <FaInstagram className="social-icon" aria-label={`${type} icon`} />
+      );
+    }
+    if (type === 'email') {
+      return (
+        <HiOutlineMail className="social-icon" aria-label={`${type} icon`} />
+      );
+    }
+  };
+
   return (
     <FooterStyles className="wrapper">
       <div className="logo">
@@ -136,36 +163,16 @@ export default function Footer({ blogStatus }) {
       <div className="social-media">
         <h4>Let's connect!</h4>
         <ul>
-          <li>
-            <div>
-              <a
-                href="https://www.instagram.com/createwithcassandra/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <FaInstagram
-                  className="social-icon"
-                  aria-label="Instagram icon"
-                />
-                createwithcassandra
-              </a>
-            </div>
-          </li>
-          <li>
-            <div>
-              <a
-                href="mailto:cassandra@cbcreativetherapy.ca"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <HiOutlineMail
-                  className="social-icon"
-                  aria-label="Email icon"
-                />
-                Shoot me an email
-              </a>
-            </div>
-          </li>
+          {socialLinks.map((social) => (
+            <li key={social.id}>
+              <div>
+                <CleanLink url={social.link}>
+                  {returnIcon(social.platformName?.toLowerCase())}
+                  {social.linkText}
+                </CleanLink>
+              </div>
+            </li>
+          ))}
         </ul>
       </div>
       <div className="copyright">

@@ -33,7 +33,20 @@ export default {
       title: 'Social Media Heading',
       type: 'text',
       description:
-        'Heading for the social media section below the contact form.'
+        'Heading for the social media section below the contact form.',
+    },
+    {
+      name: 'socialMedias',
+      type: 'array',
+      title: 'Social Medias',
+      description:
+        'List of social media links that appear in this section, try to limit to two.',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'socialMediaLink' }],
+        },
+      ],
     },
     {
       name: 'ctaBannerReference',

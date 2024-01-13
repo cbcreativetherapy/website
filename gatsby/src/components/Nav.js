@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 import { HiChevronDown, HiMenu } from 'react-icons/hi';
+import CleanLink from './CleanLink';
 
 const NavStyles = styled.nav`
   padding: 1vh 0 0 0;
@@ -366,7 +367,7 @@ const NavStyles = styled.nav`
   }
 `;
 
-export default function Nav({ blogStatus }) {
+export default function Nav({ blogStatus, navBannerContent }) {
   const [aboutChevronClicked, isAboutChevronClicked] = useState(false);
   // const [blogChevronClicked, isBlogChevronClicked] = useState(false);
   const [hamburgerIconClicked, isHamburgerIconClicked] = useState(false);
@@ -470,11 +471,13 @@ export default function Nav({ blogStatus }) {
         </ul>
       </div>
 
-      <div className="nav-banner">
-        <Link to="/contact">
-          <span>Accepting Online Clients</span>
-        </Link>
-      </div>
+      {navBannerContent.isEnabled && (
+        <div className="nav-banner">
+          <CleanLink url={navBannerContent.link}>
+            <span>{navBannerContent.text}</span>
+          </CleanLink>
+        </div>
+      )}
     </NavStyles>
   );
 }

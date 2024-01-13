@@ -25,6 +25,9 @@ import contentBlockArray from './contentBlockArray';
 import metaContent from './metaContent';
 import blogCategory from './blogCategory';
 
+import generalSite from './generalSite';
+import socialMediaLink from './socialMediaLink';
+
 export default createSchema({
   // We name our schema
   name: 'default',
@@ -47,5 +50,7 @@ export default createSchema({
     contentBlockArray,
     blogCategory,
     metaContent,
+    generalSite,
+    socialMediaLink,
   ]),
 });

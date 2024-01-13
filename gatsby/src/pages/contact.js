@@ -8,6 +8,7 @@ import { AiOutlineLinkedin } from 'react-icons/ai';
 import CtaBanner from '../components/CtaBanner';
 import HeroHeader from '../components/HeroHeader';
 import SEO from '../components/SEO';
+import CleanLink from '../components/CleanLink';
 
 const ContactPageStyles = styled.div`
   .intro {
@@ -195,6 +196,15 @@ export default function Contact({ data: { contactPage } }) {
   const [phoneNum, setPhoneNum] = useState('');
   const [message, setMessage] = useState('');
 
+  const returnIcon = (type) => {
+    if (type === 'instagram') {
+      return <FaInstagram className="icon" aria-label={`${type} icon`} />;
+    }
+    if (type === 'linkedin') {
+      return <AiOutlineLinkedin className="icon" aria-label={`${type} icon`} />;
+    }
+  };
+
   return (
     <>
       <SEO
@@ -269,29 +279,17 @@ export default function Contact({ data: { contactPage } }) {
               />
             </label>
             <button type="submit" className="submit">
-              Send!
+              Send
             </button>
           </form>
           <section className="social-media">
             <h2>{contactPage.socialMediaHeading}</h2>
-            <a
-              href="https://www.instagram.com/createwithcassandra/"
-              className="instagram"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FaInstagram className="icon" aria-label="Instagram icon" />
-              <h3>createwithcassandra</h3>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/cassandra-brennan-6ba3aa197/"
-              className="linkedin"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <AiOutlineLinkedin className="icon" aria-label="Linkedin icon" />
-              <h3>Cassandra Brennan</h3>
-            </a>
+            {contactPage.socialMedias.map((social) => (
+              <CleanLink key={social.id} url={social.link}>
+                {returnIcon(social.platformName.toLowerCase())}
+                {social.linkText}
+              </CleanLink>
+            ))}
           </section>
         </div>
         <CtaBanner
@@ -336,6 +334,12 @@ export const query = graphql`
       }
       _rawIntroParagraph
       socialMediaHeading
+      socialMedias {
+        id
+        platformName
+        link
+        linkText
+      }
       ctaBannerReference {
         heading
         subHeading

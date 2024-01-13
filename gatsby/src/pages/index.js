@@ -57,13 +57,15 @@ const HomePageStyles = styled.div`
     .block-container {
       width: calc((100% / 3) - 4rem);
       margin: 2rem;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
 
       &:hover polygon {
         fill: var(--light-green);
         transition: fill 0.6s;
+      }
+
+      .block-header-container {
+        display: flex;
+        align-items: center;
       }
 
       h3 {
@@ -72,7 +74,7 @@ const HomePageStyles = styled.div`
       }
 
       p {
-        margin-top: 1rem;
+        margin-top: 2rem;
         font-size: 1.6rem;
         line-height: 1.3;
       }
@@ -91,7 +93,7 @@ const HomePageStyles = styled.div`
         width: 20%;
         height: auto;
         position: relative;
-        left: -17px;
+        left: -15px;
         polygon {
           fill: var(--pale-grey-bg);
           stroke: var(--light-green);
@@ -146,8 +148,10 @@ export default function HomePage({ data: { homePage } }) {
           <div className="wrapper">
             {homePage.sitePreviewBlock.map((block) => (
               <div className="block-container" key={block._key}>
-                <Hexagon />
-                <h3>{block.heading}</h3>
+                <div className="block-header-container">
+                  <Hexagon />
+                  <h3>{block.heading}</h3>
+                </div>
                 <PortableText blocks={block._rawParagraph} />
               </div>
             ))}

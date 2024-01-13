@@ -29,15 +29,35 @@ const SkipLinkStyles = styled.a`
 `;
 
 export default function Layout({ children }) {
-  const blogStatusQuery = useStaticQuery(graphql`
+  const generalLayoutContentQuery = useStaticQuery(graphql`
     query {
       sanityGeneralBlogPage {
         blogIsPublic
       }
+      sanityGeneralSite {
+        navBannerEnabled
+        navBannerLink
+        navBannerText
+        footerSocialLinks {
+          id
+          platformName
+          linkText
+          link
+        }
+      }
     }
   `);
 
-  const blogIsLive = blogStatusQuery.sanityGeneralBlogPage.blogIsPublic;
+  const {
+    sanityGeneralBlogPage,
+    sanityGeneralSite,
+  } = generalLayoutContentQuery;
+  const blogIsLive = sanityGeneralBlogPage.blogIsPublic;
+  const navBannerContent = {
+    isEnabled: sanityGeneralSite.navBannerEnabled ?? false,
+    link: sanityGeneralSite.navBannerLink ?? '',
+    text: sanityGeneralSite.navBannerText ?? '',
+  };
 
   return (
     <div>
@@ -47,11 +67,14 @@ export default function Layout({ children }) {
       <SkipLinkStyles href="#main" tabIndex={0}>
         Skip to main content
       </SkipLinkStyles>
-      <Nav blogStatus={blogIsLive} />
+      <Nav blogStatus={blogIsLive} navBannerContent={navBannerContent} />
       <main role="main" id="main">
         {children}
       </main>
-      <Footer blogStatus={blogIsLive} />
+      <Footer
+        blogStatus={blogIsLive}
+        socialLinks={sanityGeneralSite.footerSocialLinks}
+      />
     </div>
   );
 }
