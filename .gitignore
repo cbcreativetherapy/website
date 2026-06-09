@@ -2,6 +2,10 @@
 .cache
 gatsby/.vscode
 gatsby/node_modules
+gatsby/.cache
+gatsby/public
 sanity/.vscode
 sanity/node_modules
-gatsby/public
+sanity/.sanity
+sanity/dist
+sanity/backups
