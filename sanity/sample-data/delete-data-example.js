@@ -11,7 +11,18 @@
  * See docs:https://www.sanity.io/docs/http-api/http-mutations#deleting-multiple-documents-by-query
  */
 
-import client from 'part:@sanity/base/client';
+import {createClient} from '@sanity/client';
+
+const projectId = process.env.SANITY_PROJECT_ID || 'njbf7cxc';
+const dataset = process.env.SANITY_DATASET || 'production';
+
+const client = createClient({
+  projectId,
+  dataset,
+  apiVersion: '2021-10-21',
+  token: process.env.SANITY_TOKEN,
+  useCdn: false,
+});
 
 client
   // .delete({ query: '*[!defined(name) && _type == "topping"] ' })

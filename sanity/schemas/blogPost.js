@@ -1,9 +1,3 @@
-import React from 'react';
-
-const highlightRender = (props) => (
-  <span style={{ backgroundColor: 'yellow' }}>{props.children}</span>
-);
-
 export default {
   name: 'blog-post',
   title: 'Blog Post',
