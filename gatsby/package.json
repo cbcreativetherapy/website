@@ -5,10 +5,10 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "build": "cross-env NODE_OPTIONS=\"-r esm\" gatsby build",
-    "develop": "cross-env NODE_OPTIONS=\"-r esm\" gatsby develop",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider gatsby build",
+    "develop": "cross-env NODE_OPTIONS=--openssl-legacy-provider gatsby develop",
     "start": "npm run develop",
-    "serve": "cross-env NODE_OPTIONS=\"-r esm\" gatsby serve",
+    "serve": "cross-env NODE_OPTIONS=--openssl-legacy-provider gatsby serve",
     "clean": "gatsby clean",
     "netlify": "netlify dev",
     "prebuild": "netlify-lambda install"

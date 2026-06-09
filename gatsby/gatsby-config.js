@@ -1,8 +1,8 @@
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 
 dotenv.config({ path: '.env' });
 
-export default {
+module.exports = {
   siteMetadata: {
     title: 'CB Creative Therapy',
     siteUrl: 'https://cbcreativetherapy.ca',

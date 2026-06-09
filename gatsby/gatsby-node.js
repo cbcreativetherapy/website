@@ -83,13 +83,13 @@ async function turnCategoriesIntoPages({ graphql, actions }) {
   });
 }
 
-export async function createPages(params) {
+exports.createPages = async function createPages(params) {
   await Promise.all([
     turnBlogPostsIntoPages(params),
     turnResponseArtIntoPages(params),
     turnCategoriesIntoPages(params),
   ]);
-}
+};
 
 exports.createSchemaCustomization = ({ actions, schema }) => {
   actions.createTypes([

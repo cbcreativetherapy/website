@@ -1,7 +1,7 @@
-import React from 'react';
-import Layout from './src/components/Layout';
+const React = require('react');
+const Layout = require('./src/components/Layout').default;
 
-export function wrapPageElement({ element, props }) {
+exports.wrapPageElement = function wrapPageElement({ element, props }) {
   // eslint-disable-next-line react/jsx-props-no-spreading
   return <Layout {...props}>{element}</Layout>;
-}
+};
